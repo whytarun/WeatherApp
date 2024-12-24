@@ -48,3 +48,14 @@ Follow these steps:
 
 3. Build the project successfully in Android Studio.
 4. Obtain an API key from WeatherAPI and add it to the app's configuration file (local.properties or equivalent).
+
+## ScreenShot
+![image alt](https://github.com/whytarun/WeatherApp/blob/fe407e5d0722a6ae7b9991e91d080bb9d73a8902/NoCity_SelectedScreen.png)
+![image alt](https://github.com/whytarun/WeatherApp/blob/fe407e5d0722a6ae7b9991e91d080bb9d73a8902/SearchScreen_weather.png)
+![image alt](https://github.com/whytarun/WeatherApp/blob/fe407e5d0722a6ae7b9991e91d080bb9d73a8902/SearchResutScreen.png)
+![image alt](https://github.com/whytarun/WeatherApp/blob/fe407e5d0722a6ae7b9991e91d080bb9d73a8902/homeScreen_weather.png)
+
+
+
+
+
