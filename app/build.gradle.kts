@@ -5,6 +5,7 @@ plugins {
     id ("kotlin-parcelize")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("org.jetbrains.dokka") version "1.9.20"
 
 }
 
@@ -71,6 +72,26 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //mock
+    testImplementation ("io.mockk:mockk:1.13.5")
+
+    // coroutines
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+
+    //flows
+    testImplementation( "app.cash.turbine:turbine:1.0.0")
+
+    kaptTest ("com.google.dagger:hilt-android-compiler:2.51.1")
+
+    testImplementation ("com.google.dagger:hilt-android-testing:2.51.1")
+
+    androidTestImplementation( "com.google.dagger:hilt-android-testing:2.51")
+    kaptAndroidTest ("com.google.dagger:hilt-compiler:2.51")
+
+    testImplementation( "com.google.truth:truth:1.4.4")
+
+
 
     implementation(libs.kotlin.serialization.json)
 

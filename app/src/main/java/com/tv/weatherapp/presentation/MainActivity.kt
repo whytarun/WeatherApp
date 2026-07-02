@@ -16,6 +16,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeatherAppTheme {
                 NavGraph()
+                val a ="tar"
+                val b ="tar"
+                println("........1${a==b}")
+                println("........2${a===b}")
+                println("........3${a.equals(b)}")
             }
         }
     }
