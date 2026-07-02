@@ -21,9 +21,28 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          plugin_marketplaces: "https://github.com/anthropics/claude-code.git"
-          plugins: "code-review@claude-code-plugins"
-          prompt: "/code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
-          show_full_output: true
+          prompt: |
+            You are reviewing pull request #${{ github.event.pull_request.number }} in the
+            repository ${{ github.repository }}.
+
+            Do the review yourself directly. Do NOT launch background agents or say you will
+            "continue later" — you run only once, so complete everything in this single session.
+
+            Steps:
+            1. Run `gh pr diff ${{ github.event.pull_request.number }}` to get the diff, and
+               `gh pr view ${{ github.event.pull_request.number }}` for the title/description.
+               Read surrounding files with Read/Grep when you need context to confirm an issue.
+            2. Look for genuine, high-confidence bugs in the CHANGED code only, especially:
+               - Null-safety problems (unsafe `!!`, unhandled nullables that can throw NPE)
+               - Coroutine / lifecycle leaks (e.g. GlobalScope instead of a scoped coroutine)
+               - Logic errors and wrong test assertions
+               Ignore style, formatting, naming, and missing-test nitpicks.
+            3. For each real issue, post an inline comment on the exact line using the
+               `mcp__github_inline_comment__create_inline_comment` tool with `confirmed: true`.
+               Post ONE comment per issue; for small self-contained fixes include a
+               ```suggestion``` block.
+            4. After posting inline comments, post one short summary comment with
+               `gh pr comment ${{ github.event.pull_request.number }} --body "..."`.
+               If you found no issues, post a single comment saying no issues were found.
           claude_args: |
-            --allowedTools "Skill,Bash,Read,Grep,Glob,mcp__github_inline_comment__create_inline_comment"
+            --allowedTools "Bash,Read,Grep,Glob,mcp__github_inline_comment__create_inline_comment"
